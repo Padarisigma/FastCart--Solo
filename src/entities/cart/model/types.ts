@@ -1,0 +1,6 @@
+export const GET_PRODUCT_IN_CART='/Cart/get-products-from-cart'
+export const INCREASE_PRODUCT='/Cart/increase-product-in-cart?id='
+export const REDUCE_PRODUCT='/Cart/reduce-product-in-cart?id='
+export const DELETE_PRODUCT='/Cart/delete-product-from-cart?id='
+export const DELETE_ALL_PRODUCT='/Cart/clear-cart'
+export const POST_PRODUCT_IN_CART='/Cart/add-product-to-cart?id='

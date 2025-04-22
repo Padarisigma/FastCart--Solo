@@ -1,0 +1,1 @@
+export const GET_BRANDS='/Brand/get-brands'

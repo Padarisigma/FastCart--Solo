@@ -1,0 +1,1 @@
+export const REGISTER='/Account/register'

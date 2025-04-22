@@ -5,15 +5,17 @@ import {useEffect, useState } from "react"
 import Link from "next/link"
 import { Search, Heart, ShoppingCart, User } from "lucide-react"
 import { useGetCartProductsQuery } from '@/entities/cart/model/api'
-import { Product } from '@/shared/types'
+import { IProduct2, Product } from '@/shared/types'
 
 export default function SearchNavbar() {
   const {data}=useGetCartProductsQuery(undefined)
-const [products, setProducts] = useState<Product>()
+const [products, setProducts] = useState<IProduct2[]>([])
 
   useEffect(() => {
-    const stored: string | null = localStorage.getItem('product')	
-    setProducts(JSON.parse(stored))
+    const stored = localStorage.getItem('wishList')
+    if (stored) {
+      setProducts(JSON.parse(stored))
+    }
   }, [])
 
   
@@ -21,7 +23,7 @@ const [products, setProducts] = useState<Product>()
   return (
     <div className="w-full bg-white ">
       <div className="container mx-auto px-4 h-14 gap-[30px] flex items-center justify-between">
-        <div className="flex items-center gap-2 border rounded-md px-3 py-1.5">
+        <div className="hidden sm:flex items-center gap-2 border rounded-md px-3 py-1.5">
           <input
             type="text"
             placeholder="What are you looking for?"

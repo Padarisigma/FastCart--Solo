@@ -81,3 +81,44 @@ export interface Brands{
 	 "id": number,
       "brandName": string
 }
+
+
+export interface IProduct2 {
+	id: number | string
+	productName: string
+	image: string
+	color: string
+	price: number
+	hasDiscount: boolean
+	discountPrice: number
+	originalPrice: number
+	quantity: number | string
+	productInMyCart: boolean
+	categoryId: number
+	categoryName: string
+	productInfoFromCart: null
+	rating: number
+	reviewCount: number
+}
+
+
+export interface ProductCardProps {
+	id: string
+	name: string
+	image: string
+	price: number
+	originalPrice: number
+	discount?: number
+	rating: number
+	reviewCount: number
+}
+
+export interface IDecode {
+	aud: string
+	email: string
+	exp: number
+	iss: string
+	name: string
+	sid: string
+	sub: string
+}

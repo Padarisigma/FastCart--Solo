@@ -30,7 +30,7 @@ export default function PriceRangeSlider({
 		}
 	}
 	return (
-		<div className=' flex flex-col gap-[30px]'>
+		<div className=' hidden sm:flex flex-col gap-[30px]'>
 			<Slider
 				value={[localMin, localMax]}
 				min={min}

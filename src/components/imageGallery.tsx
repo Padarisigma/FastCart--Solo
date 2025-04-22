@@ -12,18 +12,18 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
 	const [activeIndex, setActiveIndex] = useState(0)
 
 	return (
-		<div className='flex gap-6'>
+		<div className='flex flex-col-reverse sm:flex-row gap-6'>
 			{/* Thumbnail preview */}
-			<div className='flex flex-col gap-4'>
+			<div className='flex flex-col-reverse sm:flex-col gap-4'>
 				{images?.map((img, index) => (
 					<Card
 						key={img.id}
 						onClick={() => setActiveIndex(index)}
-						className={`cursor-pointer p-1 border ${
+						className={`cursor-pointer flex items-center justify-center p-1 border ${
 							index === activeIndex ? 'border-blue-500' : 'border-transparent'
 						}`}
 					>
-						<CardContent className='p-0 w-[200px] h-[100px] relative'>
+						<CardContent className='p-0 w-[150px] h-[100px] relative'>
 							<img
 								src={`https://store-api.softclub.tj/images/${img.images}`}
 								alt={img.alt || `Thumbnail ${img.id}`}

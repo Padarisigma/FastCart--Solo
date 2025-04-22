@@ -60,10 +60,10 @@ export default function FlashSalesTimer() {
 		<div className='w-[30px] rounded-[10px] bg-[#DB4444]  h-[60px]'></div>
 		<p className='text-[#DB4444] text-[16px]'>Today’s</p>
 	</div>
-	<div className='flex items-center justify-between'>
-		<div className='flex items-center gap-[30px] '>
+	<div className='flex  flex-col sm:flex-row gap-[20px] sm:items-center sm:justify-between'>
+		<div className='flex flex-col sm:flex-row sm:items-center gap-[30px] '>
 			<p className="text-gray-800 font-semibold text-[45px]  ">Flash Sales</p>
-<div className="bg-white  w-[400px]  text-center">
+<div className="bg-white  sm:w-[400px]  text-center">
       
       <div className="flex justify-between items-center ">
         <div className="flex-1 text-center">
@@ -103,7 +103,7 @@ export default function FlashSalesTimer() {
     </div>
 		</div>
   
-	 <div className='flex gap-[10px]'> 
+	 <div className='hidden sm:flex gap-[10px]'> 
 		<Image src="/Fill With Left Arrow.png" width={50} height={50} alt="arrow left" />
 		<Image src="/Fill with Right Arrow.png" width={50} height={50} alt="arrow right"/>
 	 </div>

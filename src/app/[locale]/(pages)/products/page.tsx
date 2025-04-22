@@ -1,11 +1,13 @@
 "use client"
 import PriceRangeSlider from '@/components/priceRange'
+import WishListBtn from '@/components/wishlist'
 import { useGetBrandsQuery } from '@/entities/brands/model/api'
 import { usePostProductInCartMutation } from '@/entities/cart/model/api'
 import { useGetCategoriesQuery } from '@/entities/categories/model/api'
 import { useGetFilteredProductsQuery } from '@/entities/products/model/api'
 import { Brands, Categories, Product } from '@/shared/types'
 import Image from 'next/image'
+import Link from 'next/link'
 import React, { useState } from 'react'
 
 const Products = () => {
@@ -31,11 +33,11 @@ const Products = () => {
 	 </div>
 
 
-	 <section className='flex justify-between  items-start pb-[50px] w-[85%] m-auto'>
-		<aside className='w-[20%] flex flex-col gap-[20px]'>
+	 <section className='flex flex-col gap-[40px] sm:gap-[0px] sm:flex-row justify-between  items-start pb-[50px] w-[85%] m-auto'>
+		<aside className='w-[100%] sm:w-[20%] flex flex-col gap-[20px]'>
 			<div className='border-t-1  flex flex-col gap-[10px] border-solid border-gray-300'>
 				<p className='font-semibold text-[18px] mt-[10px]'>Category</p>
-				<div className='overflow-auto h-[200px]'>
+				<div className='sm:overflow-auto sm:h-[200px]'>
 					{
 					categoryData?.data?.map((category: Categories)=>{
 						return <div key={category.id} className='py-[5px]'>
@@ -60,7 +62,7 @@ const Products = () => {
 				
 			</div>
 
-			<div className='border-t-1  flex flex-col gap-[10px] border-solid border-gray-300'>
+			<div className='border-t-1 hidden sm:flex flex-col gap-[10px] border-solid border-gray-300'>
 				<p className='font-semibold text-[18px] mt-[10px]'>Features</p>
 				<div className='overflow-auto h-[200px]'>
 					<div className='py-[5px] flex gap-[10px] items-center'>
@@ -98,35 +100,73 @@ const Products = () => {
 							onChange={(val: number[]) => setPriceRange([val[0], val[1]])}
 						/>
 		</aside>
-		<aside className='w-[73%] '>
+		<aside className='sm:w-[73%] '>
 			
        { filterData?.data?.products.length > 0 ? 
-			<div className='gap-[30px] grid grid-cols-3'>
+			<div className='gap-[30px] grid sm:grid-cols-3'>
          {
 				filterData?.data?.products?.map((product: Product)=>{
-					return <div key={product.id} className=' relative  w-[270px]'>
-											<div className='w-[100%] px-[20px] h-[400px] bg-[#F5F5F5] flex items-center justify-center'>
-					
-											<Image src={`https://store-api.softclub.tj/images/${product.image}` } width={300} height={0} alt={product.productName}/>
-											</div>
-											<div className='bg-black text-white flex items-center justify-center py-[10px]' onClick={()=>postProductInCart(product.id)}>
-												<p onClick={()=>postProductInCart(product.id)}>
-													Add to Cart
-												</p>
-											</div>
-											 <p className='text-[16px] pt-[20px] font-semibold'>{product.productName}</p>
-											 <p className='text-[#DB4444] text-[16px]'>$ {product.discountPrice} <span className='line-through text-gray-400'>{product.price}</span> </p>
-											 <Image src="/Five star.png" alt="score" width={100} height={20}/>
-											 {
-												product.hasDiscount ? <div className='absolute top-[10px] left-[10px] bg-[#DB4444] text-white py-[5px] px-[10px] rounded-[7px]  '>- {
-													Math.round((product.price -product.discountPrice) / (product.price / 100)) } % </div> : ''
-											 }
-											 <Image src='/Fill Heart.png' width={30} height={30} alt='wishlist' className='absolute top-[10px] right-[50px]' />
-											 <Image src="/Fill Eye (1).png" width={30} height={30} alt='show about product' className='absolute top-[10px] right-[10px]'/>
-										  </div>
+					return <div key={product.id} className=' relative  sm:w-[270px]'>
+					<div className='w-[100%] px-[20px] h-[400px] bg-[#F5F5F5] flex items-center justify-center'>
+						<Image
+							src={`https://store-api.softclub.tj/images/${product.image}`}
+							width={300}
+							height={0}
+							alt={product.productName}
+						/>
+					</div>
+					<div
+						className='bg-black text-white flex items-center justify-center py-[10px]'
+						onClick={() => postProductInCart(product.id)}
+					>
+						<p onClick={() => postProductInCart(product.id)}>Add to Cart</p>
+					</div>
+					<p className='text-[16px] pt-[20px] font-semibold'>
+						{product.productName}
+					</p>
+					<p className='text-[#DB4444] text-[16px]'>
+						$ {product.discountPrice}{' '}
+						<span className='line-through text-gray-400'>
+							{product.price}
+						</span>{' '}
+					</p>
+					<Image src='/Five star.png' alt='score' width={100} height={20} />
+					{product.hasDiscount ? (
+						<div className='absolute top-[10px] left-[10px] bg-[#DB4444] text-white py-[5px] px-[10px] rounded-[7px]  '>
+							-{' '}
+							{Math.round(
+								(product.price - product.discountPrice) /
+									(product.price / 100)
+							)}{' '}
+							%{' '}
+						</div>
+					) : (
+						''
+					)}
+					<WishListBtn
+			id={String(product.id)}
+			name={product.productName}
+			image={product.image}
+			price={product.price}
+			originalPrice={product.price}
+			discount={product.discountPrice}
+			rating={5}
+			reviewCount={250}
+		/>
+					<Link href={`/products/${product.id}`}>
+						{' '}
+						<Image
+							src='/Fill Eye (1).png'
+							width={30}
+							height={30}
+							alt='show about product'
+							className='absolute top-[10px] right-[10px]'
+						/>
+					</Link>
+				</div>
 				})
 			}
-			</div> :  <div className='flex items-center justify-center  h-[700px] text-center text-[30px]'> Not found gaysakoi ma </div>
+			</div> :  <div className='flex items-center justify-center  h-[200px] sm:h-[700px] text-center text-[30px]'> Not found gaysakoi ma </div>
 		 }
 			
 		</aside>

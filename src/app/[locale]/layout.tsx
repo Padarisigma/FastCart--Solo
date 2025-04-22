@@ -25,7 +25,7 @@ export default async function LocaleLayout({
       <body>
       <StoreProvider>
         <Header />
-        <div className='w-[100px] h-[120px]'></div>
+        <div className='h-[50px] sm:w-[100px] sm:h-[120px]'></div>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
         <Footer/>
       </StoreProvider>

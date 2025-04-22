@@ -46,28 +46,28 @@ export default function MusicExperience() {
         {/* Timer circles */}
         <div className="flex gap-4 mb-8">
           <div className="flex flex-col items-center">
-            <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mb-2">
+            <div className="w-15 h-15 rounded-full bg-gray-100 flex items-center justify-center mb-2">
               <h3 className="text-2xl font-bold">{timeLeft.days.toString().padStart(2, '0')}</h3>
             </div>
             <p className="text-sm text-white">days</p>
           </div>
 
           <div className="flex flex-col items-center">
-            <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mb-2">
+            <div className="w-15 h-15 rounded-full bg-gray-100 flex items-center justify-center mb-2">
               <h3 className="text-2xl font-bold">{timeLeft.hours.toString().padStart(2, '0')}</h3>
             </div>
             <p className="text-sm text-white">hours</p>
           </div>
 
           <div className="flex flex-col items-center">
-            <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mb-2">
+            <div className="w-15 h-15 rounded-full bg-gray-100 flex items-center justify-center mb-2">
               <h3 className="text-2xl font-bold">{timeLeft.minutes.toString().padStart(2, '0')}</h3>
             </div>
             <p className="text-sm text-white">minute</p>
           </div>
 
           <div className="flex flex-col items-center">
-            <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mb-2">
+            <div className="w-15 h-15 rounded-full bg-gray-100 flex items-center justify-center mb-2">
               <h3 className="text-2xl font-bold">{timeLeft.seconds.toString().padStart(2, '0')}</h3>
             </div>
             <p className="text-sm text-white">seconds</p>

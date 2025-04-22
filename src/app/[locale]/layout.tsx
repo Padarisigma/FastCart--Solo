@@ -22,7 +22,7 @@ export default async function LocaleLayout({
   // const t = await getTranslations('HomePage');
   return (
     <html lang={locale}>
-      <body>
+      <body className='max-w-[1520px] m-auto'>
       <StoreProvider>
         <Header />
         <div className='h-[50px] sm:w-[100px] sm:h-[120px]'></div>

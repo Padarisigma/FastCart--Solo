@@ -35,7 +35,7 @@ const RegistrationForm = () => {
 
 	const router = useRouter()
 	useEffect(() => {
-		if (data?.statusCode == 200) router.push('/')
+		if (data?.statusCode == 200) router.push('/login')
 	}, [data?.statusCode, router])
 	return (
 		<>

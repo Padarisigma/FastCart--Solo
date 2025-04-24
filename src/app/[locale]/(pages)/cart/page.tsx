@@ -19,7 +19,7 @@ const Cart = () => {
         return <>
         <div className='pb-[40px]'>
           <table className=' w-[100%]'>
-            <tbody className='block sm:hidden'>
+            <tbody className='sm:hidden table'>
             {
         cart?.productsInCart?.length == 0 ?  <tr>
         <td colSpan={5}>
@@ -68,7 +68,7 @@ const Cart = () => {
         })
       }
             </tbody>
-      <tbody className='hidden sm:block'>
+      <tbody className='hidden sm:table w-full '>
       <tr className='text-[#00000099] text-[16px] '>
         <th>Product</th>
         <th>Price</th>

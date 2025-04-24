@@ -35,7 +35,7 @@ export default function MusicExperience() {
   }, []);
 
   return (
-    <section className="flex flex-col bg-[#000000] md:flex-row items-center justify-between p-6 max-w-6xl mx-auto my-12">
+    <section className="flex flex-col sm:w-[85%] m-auto bg-[#000000] md:flex-row items-center justify-between p-[30px]  mx-auto mt-[50px]">
       {/* Left side - Info */}
       <aside className="w-full md:w-1/2 mb-8 md:mb-0 md:pr-8">
         <p className="text-[#00FF66] mb-2 text-sm font-medium">Categories</p>

@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 const SignupForm = () => {
 	return (
-		<div className='flex items-center justify-center min-h-screen bg-white'>
+		<div className='flex items-center mb-[50px] justify-center min-h-screen bg-white'>
 			<div className='w-full max-w-md px-8 py-10 border border-gray-200 shadow-md rounded-md'>
 				<h2 className='text-2xl font-semibold text-center text-black'>
 					Create an account

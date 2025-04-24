@@ -11,6 +11,7 @@ import Slider from '@/widgets/slider'
 import FlashSalesTimer from '@/widgets/timer'
 import Image from 'next/image'
 import Link from 'next/link'
+import { SnackbarProvider } from 'notistack'
 
 export default function HomePage() {
 	const { data: categoryData } = useGetCategoriesQuery([])
@@ -19,6 +20,10 @@ export default function HomePage() {
 	
 	return (
 		<>
+		<SnackbarProvider
+		maxSnack={3}
+      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+		>
 			<section className='w-[85%] m-auto flex flex-col sm:flex-row justify-between gap-[40px] sm:gap-[0px] '>
 				<div className='sm:w-[20%] flex flex-col py-[20px] gap-[10px] h-[400px] overflow-auto'>
 					{categoryData?.data?.map((item: Categories) => {
@@ -409,6 +414,8 @@ export default function HomePage() {
 			</section>
 
 			<ServicesSection />
+		</SnackbarProvider>
+			
 		</>
 	)
 }

@@ -6,7 +6,8 @@ import {
 	useEditUserProfileMutation,
 	useGetProfileByIdQuery,
 } from '../entities/account/model/api'
-import { IDecode } from '../shared/types'
+import { IDecode } from '@/shared/types'
+import { jwtDecode } from 'jwt-decode'
 
 const Account: React.FC = () => {
 	const [user, setUser] = useState<IDecode | null>(null)
@@ -22,8 +23,16 @@ const Account: React.FC = () => {
 	const [imageS, setImageS] = useState<File | null>(null)
 
 	useEffect(() => {
-		setUser(JSON.parse(localStorage.getItem('decode_token') || '{}'))
-	}, [])
+		const token = localStorage.getItem('access_token');
+		if (token) {
+			try {
+				setUser(jwtDecode(token));
+			} catch (error) {
+				console.error('Ошибка при декодировании токена:', error);
+			}
+		}
+	}, []);
+	
 
 	useEffect(() => {
 		if (data) {
@@ -32,7 +41,7 @@ const Account: React.FC = () => {
 			setEmail(data?.data?.email || '')
 			setPhone(data?.data?.phoneNumber || '')
 			setDob(data?.data?.dob || '')
-		}
+		}		
 	}, [data])
 
 	const editUser = async (event: React.FormEvent) => {
@@ -57,15 +66,40 @@ const Account: React.FC = () => {
 	}
 	return (
 		<main className='flex-1 p-6 flex flex-col items-center'>
-			<div className='w-full max-w-2xl bg-white shadow p-6 rounded-lg'>
-				<div className='flex gap-[20px] items-center'>
-					<h2 className='text-xl font-semibold text-red-500 mb-4'>
-						Profile 
+			<div className='w-full  max-w-2xl bg-white shadow p-6 rounded-lg'>
+			<h2 className='text-xl italic tracking-[1px] font-semibold text-red-500 mb-4'>
+						Profile | <span className='text-[20px] py-[2px]'>
+            {data?.data?.userName
+             ? data.data.userName.charAt(0).toUpperCase() + data.data.userName.slice(1).toLowerCase()
+              : ''} {data?.data?.lastName }
+             </span>
+
 					</h2>
+					<div className='flex  flex-col sm:flex-row gap-[30px]'>
+						<div className='flex gap-[20px]'>
+					
+					<div className='flex flex-col items-start gap-[30px]'>
+						<div className='w-[300px]  h-[300px] flex items-center  sm:items-start'>
+              <img
+					src={
+							`https://store-api.softclub.tj/images/${data?.data?.image}` ||
+							'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgF2suM5kFwk9AdFjesEr8EP1qcyUvah8G7w&s'
+						}
+						alt='Profile Image'
+						className=''
+					/>
+					</div>
+					
+					<input
+						type='file'
+						onChange={e => setImageS(e.target.files?.[0] || null)}
+					/>
+					</div>
+					
 				</div>
 
 				<form onSubmit={editUser} className='space-y-6'>
-					<div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+					<div className='flex flex-col gap-[30px]'>
 						<Input
 							value={firstName}
 							onChange={e => setFirstName(e.target.value)}
@@ -94,7 +128,7 @@ const Account: React.FC = () => {
 					<h3 className='text-lg font-semibold text-gray-700'>
 						Password Changes
 					</h3>
-					<div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+					<div className=' flex flex-col gap-[20px]'>
 						<Input type='password' placeholder='Current password' />
 						<Input type='password' placeholder='New password' />
 						<Input type='password' placeholder='Confirm new password' />
@@ -115,6 +149,8 @@ const Account: React.FC = () => {
 						</button>
 					</div>
 				</form>
+					</div>
+				
 			</div>
 		</main>
 	)
